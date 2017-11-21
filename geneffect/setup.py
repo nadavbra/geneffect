@@ -8,12 +8,12 @@ from .gene_data_loader import load_genes
 from .variant_processing import VariantInterpreter
 
 class Setup(object):
-    def __init__(self, user_specified_ref_genome, load_pfam_data = True):
+    def __init__(self, user_specified_ref_genome, should_load_pfam_data = True):
         
         self._config_setup = ConfigSetup(user_specified_ref_genome)
         self.genome_reader = GenomeReader(self._config_setup)
         
-        if load_pfam_data:
+        if should_load_pfam_data:
             self.pfam_data = load_pfam_data(self._config_setup)
         else:
             log('Skipping on setting pfam data.')

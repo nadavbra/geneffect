@@ -53,8 +53,8 @@ class CDSIsoform(object):
         self.cds_exons = []
         last_isoform_end = 0
         
-        for start, end in cds_coordinates:
-            cds_exon = CDSExon(self.chromosome, self.strand, start, end, last_isoform_end + 1, genome_reader)
+        for chromosome_start, chromosome_end in cds_chromosomal_coordinates:
+            cds_exon = CDSExon(self.chromosome, self.strand, chromosome_start, chromosome_end, last_isoform_end + 1, genome_reader)
             self.cds_exons.append(cds_exon)
             last_isoform_end = cds_exon.isoform_end
         
@@ -135,7 +135,7 @@ def _load_cds_records(config_setup):
 def _load_gene_annotations(config_setup):
     
     gene_annotations = pd.read_csv(config_setup.get_path('GENCODE_GENE_ANNOTATIONS_CSV_FILE_PATH'), sep = '\t', comment = '#', \
-            names = ['chr', 'source', 'type', 'start', 'end', 'score', 'strand', 'phase', 'extra_fields'], nrows = limit)
+            names = ['chr', 'source', 'type', 'start', 'end', 'score', 'strand', 'phase', 'extra_fields'])
     gene_annotations['extra_fields'] = gene_annotations['extra_fields'].apply(_parse_annotation_extra_fields)
     gene_annotations['gene_id'] = gene_annotations['extra_fields'].apply(lambda extra_fields: extra_fields['gene_id'].split('.')[0])
     gene_annotations['gene_type'] = gene_annotations['extra_fields'].apply(itemgetter('gene_type'))

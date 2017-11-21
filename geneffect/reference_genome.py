@@ -8,7 +8,7 @@ class GenomeReader(object):
     
     def __init__(self, config_setup):
         self.ref_genome_dir = config_setup.get_path('REFERENCE_GENOME_DIR')
-        self.chromosome_readers = dict(map(create_chromosome_reader, os.listdir(self.ref_genome_dir)))
+        self.chromosome_readers = dict(map(self._create_chromosome_reader, os.listdir(self.ref_genome_dir)))
 
     def read_seq(self, chromosome, start, end):
         return self.chromosome_readers[_fix_chromosome_name(chromosome)].read_seq(start, end)
@@ -20,7 +20,7 @@ class GenomeReader(object):
     def __contains__(self, chromosome):
         return _fix_chromosome_name(chromosome) in self.chromosome_readers
         
-    def _create_chromosome_reader(file_name):
+    def _create_chromosome_reader(self, file_name):
         chr_name = file_name.split('.')[0].replace('chr', '')
         f = open(os.path.join(self.ref_genome_dir, file_name), 'r')
         return (chr_name, ChromosomeReader(f))

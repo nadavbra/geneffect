@@ -68,8 +68,9 @@ def load_pfam_data(config_setup):
     pfam_clan_counts = pfam_domains['clan'].value_counts()
     common_pfam_clans = sorted(set(pfam_clan_counts[pfam_clan_counts >= MIN_COUNTS_FOR_COMMON_CLAN].index))
     
-    log('Loaded %d pfam records, %d of which are domains. Found %d unique clans within these domains, %d of which are common (at least %d occurrences).' % \
-            (len(pfam_data), len(pfam_domains), len(pfam_clan_counts), len(common_pfam_clans), MIN_COUNTS_FOR_COMMON_CLAN))
+    log(('Loaded %d pfam records, %d of which are domains. Found %d unique clans within these domains, %d of which are common ' + \
+            '(with at least %d occurrences).') % (len(pfam_data), len(pfam_domains), len(pfam_clan_counts), len(common_pfam_clans), \
+            MIN_COUNTS_FOR_COMMON_CLAN))
     return PfamData(pfam_data, pfam_domains, pfam_domains_by_uniprot_id, pfam_clan_counts, common_pfam_clans)
         
 def load_uniprot_data(config_setup, pfam_data = None):

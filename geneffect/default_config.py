@@ -60,7 +60,7 @@ GENCODE_GENE_ANNOTATIONS_CSV_FILE_PATH = [
 GENENAMES_GENE_META_DATA_JSON_FILE_PATH = [
     # Meta data (including different names) of all human genes can be downloaded from genenames' FTP site at:
     # ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/json/non_alt_loci_set.json
-    (('hg19', 'GRCh38'), os.path.join(DATA_DIR, 'non_alt_loci_set.json')),
+    (('hg19', 'GRCh38'), os.path.join(DATA_DIR, 'genenames/non_alt_loci_set.json')),
 ]
 
 UNIPROT_PROTEOME_XML_FILE_PATH = [

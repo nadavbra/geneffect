@@ -62,7 +62,7 @@ class VariantInterpreter(object):
         for gene in genes:
             genes_per_chromosome[gene.canonical_cds_isoform.chromosome].append(gene)
             
-        self.chromosome_interpreters = {chromosome: ChromosomeVariantInterpreter(chr_name, chr_genes, genome_reader) for chr_name, chr_genes in \
+        self.chromosome_interpreters = {chr_name: ChromosomeVariantInterpreter(chr_name, chr_genes, genome_reader) for chr_name, chr_genes in \
                 genes_per_chromosome.items()}
                 
     def process_snp(self, chromosome, coordinate, ref_nt, alt_nt):

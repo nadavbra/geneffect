@@ -1,7 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
 import os
-import sys
 import traceback
 
 from .util import log
@@ -25,9 +24,8 @@ if os.path.exists(config_file_path):
                 'copying the file default_config.py (which can be found within this module). Caused by error:' + '\n' + '%s') % \
                 (config_file_path, traceback.format_exc()))
 else:
-    print('Configuration file doesn\'t exist: %s' % config_file_path)
-    print('You need to create it by copying the file default_config.py (which can be found within this module).')
-    sys.exit(1)
+    raise IOError(('Configuration file doesn\'t exist: %s. You need to create it by copying the file default_config.py (which ' + \
+            'can be found within this module).') % config_file_path)
     
 class ConfigSetup(object):
 
@@ -43,16 +41,16 @@ class ConfigSetup(object):
     
 def _get_ref_genome_version(user_specified_ref_genome):
     
-    ref_genome_names = get_raw_variable('REF_GENOME_NAMES')
+    ref_genome_names = _get_raw_variable('REF_GENOME_NAMES')
     
     if user_specified_ref_genome in ref_genome_names:
         return ref_genome_names[user_specified_ref_genome]
     else:
-        raise Exception('Unrecognized reference genome name: %s. Consider modifying REF_GENOME_NAMES in the configuration file.' % user_specified_ref_genome)
+        raise KeyError('Unrecognized reference genome name: %s. Consider modifying REF_GENOME_NAMES in the configuration file.' % user_specified_ref_genome)
     
 def _get_path(variable_name, reference_genome_version):
-    path = get_variable_value(variable_name, reference_genome_version)
-    assert os.path.exists(path), 'File path specified in your configuration (%s) doesn\'t exist: %s' % (config_file_path, path)
+    path = _get_variable_value(variable_name, reference_genome_version)
+    assert os.path.exists(path), 'The file path specified in your configuration (%s) doesn\'t exist: %s' % (config_file_path, path)
     return path
     
 def _get_variable_value(variable_name, reference_genome_version):
