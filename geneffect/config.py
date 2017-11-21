@@ -18,7 +18,7 @@ config_file_path = os.path.expanduser(config_file_path)
 if os.path.exists(config_file_path):
     try:
         raw_config = {}
-        execfile(config_file_path, raw_config)
+        exec(open(config_file_path, 'r').read(), raw_config)
     except:
         raise ValueError(('Your configuration file (%s) seems to be invalid. Consider to reset and reconfigure your configuration file by ' + \
                 'copying the file default_config.py (which can be found within this module). Caused by error:' + '\n' + '%s') % \

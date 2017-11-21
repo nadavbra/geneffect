@@ -1,6 +1,7 @@
 from __future__ import absolute_import, division, print_function
 
 from operator import itemgetter
+import io
 import json
 
 import numpy as np
@@ -110,7 +111,7 @@ def _parse_cds_isoform(transcript_id, transcript_cds_rows, genome_reader):
     
     transcript_cds_rows = transcript_cds_rows.sort_values('exon_number')
     exon_numbers = transcript_cds_rows['exon_number']
-    assert list(exon_numbers) == range(exon_numbers.min(), exon_numbers.max() + 1)
+    assert list(exon_numbers) == list(range(exon_numbers.min(), exon_numbers.max() + 1))
     
     chromosome, = transcript_cds_rows['chr'].unique()
     strand, = transcript_cds_rows['strand'].unique()
@@ -145,7 +146,7 @@ def _load_gene_annotations(config_setup):
     
 def _load_gene_meta_data(config_setup):
     
-    with open(config_setup.get_path('GENENAMES_GENE_META_DATA_JSON_FILE_PATH'), 'r') as f:
+    with io.open(config_setup.get_path('GENENAMES_GENE_META_DATA_JSON_FILE_PATH'), 'r', encoding = 'utf-8') as f:
         raw_meta_data = json.load(f)
     
     ensembel_ids = []
