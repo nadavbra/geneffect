@@ -60,6 +60,12 @@ Installation
 To install, just run:
 
     python setup.py install
+    
+Or:
+    
+    pip install geneffect
+    
+(with the latter you will have to copy your configuration file manually)
 
 
 After installation, you will have to setup your configuration file (by default it is the file .geneffect_config.py in your homedir, or you can define it to be any other file by setting the environment variable GENEFFECT_CONFIG_FILE). The default settings are also available in the file default_config.py within this module.
