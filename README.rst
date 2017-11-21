@@ -1,7 +1,7 @@
 What is geneffect?
 --------
 
-This library combines genomic and proteomic data from various databases (e.g. GENCODE, UCSC's reference genome, UniProt and pfam) into unified gene objects (currently only protein-coding genes). It allows you to infer the functional effects of genetic variations in the gene/protein-level.
+This library combines genomic and proteomic data from various databases (e.g. GENCODE, UCSC's reference genome, UniProt and pfam) into unified gene objects (currently only protein-coding genes). It allows you to infer the functional effects of genetic variations at the gene/protein-level.
 
 
 Basic usage
@@ -10,7 +10,7 @@ Basic usage
 With geneffect installed, you can obtain genomic and proteomic data of protein-coding genes:
     >>> import geneffect
     >>> geneffect_setup = geneffect.Setup('GRCh38')
-    [This may take a few minutes to setup...]
+    [This may take a few minutes...]
     >>> gene_HOXD4, = [gene for gene in geneffect_setup.genes if gene.symbol == 'HOXD4']
     >>> print(gene_HOXD4)
     <Gene: HOXD4, P09016 / <CDSIsoform: ENST00000306324.3 (chr2 (+), 2 CDS exons)>>
@@ -45,3 +45,18 @@ You can also interpret SNPs and their effects on protein-coding genes:
     >>> print(snp_gene_effect.ref_aa, snp_gene_effect.alt_aa, snp_gene_effect.ref_codon, snp_gene_effect.alt_codon)
     R G CGA GGA
 
+
+Installation
+--------
+
+Dependencies:
+* numpy
+* pandas
+* biopython
+* interval_tree (https://github.com/moonso/interval_tree)
+
+To install, just run:
+    >> python setup.py install
+    
+After the installation, you will have to setup your configuration file (.geneffect_config.py in your homedir by default, or you can define it to be another file by setting the environment variable GENEFFECT_CONFIG_FILE). The default settings are also available in the file default_config.py within this module.
+Just open your configuration file with your favorite editor and follow the instructions within it. In order for this package to work, you will have to download files from 5 databases (reference genome from UCSC, gene annotations from GENCODE, metadata of genes from genenames, protein records from UniProt, and, optionally, domain annotations from pfam). 
