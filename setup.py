@@ -11,6 +11,7 @@ OPERATIONAL_CONFIG_FILE_PATH = os.path.expanduser('~/.geneffect_config.py')
 
 class CreateConfigFileCommand(install):
     def run(self):
+        install.run(self)
         copyfile(DEFAULT_CONFIG_FILE_PATH, OPERATIONAL_CONFIG_FILE_PATH)
         print('Created your configuration file with default setting at: %s. Please review those settings.' % OPERATIONAL_CONFIG_FILE_PATH)
         
