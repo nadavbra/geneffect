@@ -49,14 +49,18 @@ You can also interpret SNPs and their effects on protein-coding genes:
 Installation
 --------
 
-Dependencies:
+**Dependencies:**
+
 * numpy
 * pandas
 * biopython
 * interval_tree (https://github.com/moonso/interval_tree)
 
+
 To install, just run:
-    >> python setup.py install
-    
+
+    python setup.py install
+
+
 After the installation, you will have to setup your configuration file (.geneffect_config.py in your homedir by default, or you can define it to be another file by setting the environment variable GENEFFECT_CONFIG_FILE). The default settings are also available in the file default_config.py within this module.
 Just open your configuration file with your favorite editor and follow the instructions within it. In order for this package to work, you will have to download files from 5 databases (reference genome from UCSC, gene annotations from GENCODE, metadata of genes from genenames, protein records from UniProt, and, optionally, domain annotations from pfam). 
