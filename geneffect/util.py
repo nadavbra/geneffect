@@ -29,16 +29,6 @@ def get_unique_or_none(collection):
         return element
     else:
         return None
-        
-def merge_set_dicts(set_dicts):
-    
-    merged_dict = defaultdict(set)
-    
-    for set_dict in set_dicts:
-        for key, values in set_dict.items():
-            merged_dict[key] |= values
-            
-    return dict(merged_dict)
 
 
 ### Biopython Helper Functions ###
