@@ -49,7 +49,7 @@ You can also interpret SNPs and their effects on protein-coding genes:
 Installation
 --------
 
-**Dependencies:**
+Dependencies:
 
 * numpy
 * pandas
