@@ -3,6 +3,9 @@ What is geneffect?
 
 This library combines genomic and proteomic data from various databases (e.g. GENCODE, UCSC's reference genome, UniProt and pfam) into unified gene objects (currently only protein-coding genes). It allows you to infer the functional effects of genetic variations at the gene/protein-level.
 
+If you use geneffect in work contributing to a scientific publication, we ask that you cite our publication: 
+Nadav Brandes, Nathan Linial, Michal Linial. Modeling Functional Genetic Alteration in Cancer Reveals New Candidate Driver Genes. https://doi.org/10.1101/242354
+
 
 Basic usage
 --------
