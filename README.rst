@@ -32,21 +32,49 @@ You can also interpret SNPs and their effects on protein-coding genes:
     >>> snp = geneffect_setup.variant_interpreter.process_snp('17', 43082434, 'G', 'C')
     >>> print(snp)
     chr17:43082434G>C [P38398:R1443G]
-    >>> print('%s>%s at chr%s:%d' % (snp.ref_nt, snp.alt_nt, snp.chromosome, snp.chromosome_coordinate))
+    >>> print('%s>%s at chr%s:%d' % (snp.ref_dna_seq, snp.alt_dna_seq, snp.chromosome, snp.chromosome_start_coordinate))
     G>C at chr17:43082434
-    >>> print('%d gene effects: %s' % (len(snp.gene_effects), snp.gene_effects))
+    >>> print('%d CDS gene effects: %s' % (len(snp.cds_gene_effects), snp.cds_gene_effects))
     1 gene effects: [P38398:R1443G]
-    >>> snp_gene_effect, = snp.gene_effects
-    >>> print(snp_gene_effect)
+    >>> snp_cds_gene_effect, = snp.cds_gene_effects
+    >>> print(snp_cds_gene_effect)
     P38398:R1443G
-    >>> print(snp_gene_effect.affected_gene)
+    >>> print(snp_cds_gene_effect.affected_gene)
     <Gene: BRCA1, P38398 / <CDSIsoform: ENST00000357654.7 (chr17 (-), 22 CDS exons)>>
-    >>> print(snp_gene_effect.is_synonymous(), snp_gene_effect.is_missense(), snp_gene_effect.is_nonsense())
+    >>> print(snp_cds_gene_effect.is_synonymous(), snp_cds_gene_effect.is_missense(), snp_cds_gene_effect.is_nonsense())
     False True False
-    >>> print(snp_gene_effect.protein_coordinate, snp_gene_effect.cds_coordinate, snp_gene_effect.phase)
+    >>> print(snp_cds_gene_effect.protein_coordinate, snp_cds_gene_effect.cds_coordinate, snp_cds_gene_effect.phase)
     1443 4327 0
-    >>> print(snp_gene_effect.ref_aa, snp_gene_effect.alt_aa, snp_gene_effect.ref_codon, snp_gene_effect.alt_codon)
+    >>> print(snp_cds_gene_effect.ref_aa, snp_cds_gene_effect.alt_aa, snp_cds_gene_effect.ref_codon, snp_cds_gene_effect.alt_codon)
     R G CGA GGA
+    
+As of version 1.2.0, geneffect can also interpret more complex variants:
+    >>> variant = geneffect_setup.variant_interpreter.process_variant('17', 41276079, 'A', 'GC') # Frameshift indel
+    >>> print(variant)
+    chr17:41276079A>GC [KRTAP9-7.382:A->GC [frameshift]]
+    >>> print(variant.is_snp(), variant.is_insert(), variant.is_deletion(), variant.is_complex_indel())
+    False False False True
+    >>> cds_gene_effect, = variant.cds_gene_effects
+    >>> print(cds_gene_effect)
+    KRTAP9-7.382:A->GC [frameshift]
+    >>> print(cds_gene_effect.is_frameshift, cds_gene_effect.phase_change)
+    True 1
+    >>> variant = geneffect_setup.variant_interpreter.process_variant('17', 41276079, 'A', 'TATAGTG') # Complex amino-acid change
+    >>> print(variant)
+    chr17:41276079A>TATAGTG [A8MTY7:N128YSD]
+    >>> cds_gene_effect, = variant.cds_gene_effects
+    >>> print(cds_gene_effect.introduced_stop_codon, cds_gene_effect.destroys_start_codon())
+    False False
+    >>> print(cds_gene_effect.protein_start_coordinate, cds_gene_effect.ref_protein_seq, cds_gene_effect.alt_protein_seq)
+    128 N YSD
+    >>> variant = geneffect_setup.variant_interpreter.process_variant('17', 41347060, 'C', 'T') # Canonical splice-site effect
+    >>> print(variant)
+    chr17:41347060C>TKRT33A: canonical splicing affected in intron #4
+    >>> splicing_gene_effect, = variant.splicing_gene_effects
+    >>> print(splicing_gene_effect.affected_gene)
+    <Gene: KRT33A, O76009 / <CDSIsoform: ENST00000007735.3 (chr17 (-), 7 CDS exons)>>
+    >>> print(splicing_gene_effect.affected_intron_index)
+    4
 
 
 Installation
