@@ -7,7 +7,6 @@ from datetime import datetime
 
 from Bio.Seq import Seq
 from Bio.Alphabet import Alphabet
-from Bio.Data import CodonTable
 
 
 ### Project Functions ###
@@ -41,11 +40,5 @@ def as_biopython_seq(seq):
     else:
         raise Exception('Cannot resolve type %s as Biopython Seq' % type(seq))
     
-def codon_to_aa(codon, codon_table = 'Standard'):
-
-    codon_table = CodonTable.unambiguous_dna_by_name[codon_table]
-
-    if codon in codon_table.stop_codons:
-        return as_biopython_seq('*')
-    else:
-        return as_biopython_seq(codon_table.forward_table[codon])
+def join_seqs(seqs):
+    return Seq(''.join([str(seq) for seq in seqs]), Alphabet())

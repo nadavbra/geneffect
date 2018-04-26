@@ -21,7 +21,7 @@ def readme():
 
 setup(
     name = 'geneffect',
-    version = '1.1',
+    version = '1.2.0',
     description = 'A Python library for retrieving functional annotations of genes and analyzing the ' + \
             'effects of genetic variants, currently focusing on proteomic data of protein-coding genes.',
     long_description = readme(),
