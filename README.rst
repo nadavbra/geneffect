@@ -81,6 +81,8 @@ As of version 1.2.0, geneffect can also interpret more complex variants:
 Installation
 --------
 
+**Note: As of yet, we only support Python2 (an effort to make the code Python3-compatible is still ongoing).** 
+
 Dependencies:
 
 * numpy
