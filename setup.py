@@ -25,6 +25,7 @@ setup(
     description = 'A Python library for retrieving functional annotations of genes and analyzing the ' + \
             'effects of genetic variants, currently focusing on proteomic data of protein-coding genes.',
     long_description = readme(),
+    long_description_content_type = 'text/markdown',
     url = 'https://github.com/nadavbra/geneffect',
     author = 'Nadav Brandes',
     author_email  ='nadav.brandes@mail.huji.ac.il',
