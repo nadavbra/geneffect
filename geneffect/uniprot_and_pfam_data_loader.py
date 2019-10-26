@@ -38,7 +38,7 @@ class UniprotRecord(object):
             return None
             
         pfam_domains['distance'] = pfam_domains.apply(calc_distance_from_pfam_domain, args = (location,), axis = 1)
-        return pfam_domains.loc[pfam_domains['distance'].argmin()]
+        return pfam_domains.loc[pfam_domains['distance'].idxmin()]
         
     def __len__(self):
         return len(self.seq)
