@@ -50,10 +50,10 @@ REFERENCE_GENOME_DIR = [
 
 GENCODE_GENE_ANNOTATIONS_CSV_FILE_PATH = [
     # GENCODE's gene annotations for the entire human genome in version hg19 can be downloaded from their FTP site at:
-    # ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
+    # ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
     (('hg19',), os.path.join(DATA_DIR, 'gencode/gencode.v19.annotation.gtf.gz')),
     # For version GRCh38:
-    # ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_26/gencode.v26.annotation.gtf.gz
+    # ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_26/gencode.v26.annotation.gtf.gz
     (('GRCh38',), os.path.join(DATA_DIR, 'gencode/gencode.v26.annotation.gtf.gz')),
 ]
 
