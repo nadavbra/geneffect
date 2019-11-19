@@ -1,5 +1,5 @@
 What is geneffect?
---------
+==========
 
 This library combines genomic and proteomic data from various databases (e.g. GENCODE, UCSC's reference genome, UniProt and pfam) into unified gene objects (currently only protein-coding genes). It allows you to infer the functional effects of genetic variations at the gene/protein-level.
 
@@ -9,7 +9,7 @@ Nadav Brandes, Nathan Linial, Michal Linial, Quantifying gene selection in cance
 
 
 Basic usage
---------
+==========
 
 With geneffect installed, you can obtain genomic and proteomic data of protein-coding genes:
     >>> import geneffect
@@ -79,7 +79,7 @@ As of version 1.2.0, geneffect can also interpret more complex variants:
 
 
 Installation
---------
+==========
 
 Dependencies:
 
@@ -89,7 +89,19 @@ Dependencies:
 * interval_tree (https://github.com/moonso/interval_tree)
 
 
-To install, just run:
+Automatic installation (using the installation script)
+----------
+
+Run:
+    >>> wget https://raw.githubusercontent.com/nadavbra/geneffect/master/install_geneffect.sh
+    >>> chmod a+x install_geneffect.sh
+    >>> ./install_geneffect.sh
+    
+    
+Manual installation
+----------
+
+Clone the project and run:
 
     python setup.py install
     
