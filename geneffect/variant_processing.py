@@ -6,6 +6,7 @@ from collections import defaultdict
 from interval_tree import IntervalTree
 
 from .util import as_biopython_seq, join_seqs
+from .reference_genome import find_chrom
 
 class VariantAtTheEndOfInvalidGeneException(Exception):
     '''
@@ -36,13 +37,12 @@ class VariantInterpreter(object):
         
     def get_chromsome_interpreter(self, chromosome):
     
-        if chromosome == 'MT':
-            chromosome = 'M'
-    
-        if chromosome in self.chromosome_interpreters:
-            return self.chromosome_interpreters[chromosome]
-        else:
+        chromosome = find_chrom(chromosome, self.chromosome_interpreters.keys())
+        
+        if chromosome is None:
             return ChromosomeVariantInterpreter(chromosome, [], self.genome_reader)
+        else:
+            return self.chromosome_interpreters[chromosome]            
         
 class ChromosomeVariantInterpreter(object):
 
