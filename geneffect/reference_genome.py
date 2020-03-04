@@ -72,6 +72,11 @@ def _find_synonymous_chr_names(chr_name):
         if chr_name in synonymous_chr_name_group:
             return synonymous_chr_name_group
             
+    # Single-digit numbers can either appear with or without a trailing 0.
+    if chr_name.isdigit() and len(str(int(chr_name))) == 1:
+        chr_number = str(int(chr_name))
+        return {chr_number, '0' + chr_number}
+            
     return {chr_name}
 
 _SYNONYMOUS_CHR_NAME_GROUPS = [
