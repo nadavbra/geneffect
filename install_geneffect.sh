@@ -1,4 +1,4 @@
-#! /bin/tcsh -e
+#! /bin/tcsh -ef
 
 
 # Determine the Python version to use.
