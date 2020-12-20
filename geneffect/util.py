@@ -6,7 +6,6 @@ from collections import defaultdict
 from datetime import datetime
 
 from Bio.Seq import Seq
-from Bio.Alphabet import Alphabet
 
 
 ### Project Functions ###
@@ -36,9 +35,9 @@ def as_biopython_seq(seq):
     if isinstance(seq, Seq):
         return seq
     elif isinstance(seq, str):
-        return Seq(seq, Alphabet())
+        return Seq(seq)
     else:
         raise Exception('Cannot resolve type %s as Biopython Seq' % type(seq))
     
 def join_seqs(seqs):
-    return Seq(''.join([str(seq) for seq in seqs]), Alphabet())
+    return Seq(''.join([str(seq) for seq in seqs]))
